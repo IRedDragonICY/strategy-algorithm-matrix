@@ -170,8 +170,8 @@ if __name__ == "__main__":
         print("3. Multiplication (Strassen's algorithm)")
         print("4. Transpose")
         print("5. Determinant")
-        print("6. Inverse")
-        print("7. Adjoint")
+        print("6. Adjoint")
+        print("7. Inverse")
         print("8. Exit")
 
         choice = input("Enter your choice (1-8): ")
@@ -208,9 +208,9 @@ if __name__ == "__main__":
                 elif choice == '5':
                     result = matrix.determinant()
                 elif choice == '6':
-                    result = matrix.inverse()
-                else:
                     result = matrix.adjoint()
+                else:
+                    result = matrix.inverse()
                 print("Result:")
                 print(result)
             except ValueError as e:
