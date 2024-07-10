@@ -75,19 +75,6 @@ class Matrix:
             det += ((-1) ** j) * self.data[0][j] * sub_matrix.determinant()
         return det
 
-    def inverse(self):
-        if self.rows != self.cols:
-            raise ValueError("Inverse is only defined for square matrices.")
-        det = self.determinant()
-        if det == 0:
-            raise ValueError("Matrix is not invertible (determinant is zero).")
-        adj = self.adjoint()
-        result = Matrix(self.rows, self.cols)
-        for i in range(self.rows):
-            for j in range(self.cols):
-                result.data[i][j] = adj.data[i][j] / det
-        return result
-
     def adjoint(self):
         if self.rows != self.cols:
             raise ValueError("Adjoint is only defined for square matrices.")
@@ -102,6 +89,19 @@ class Matrix:
                                 sub_matrix.data[k if k < i else k - 1][l if l < j else l - 1] = self.data[k][l]
                 result.data[i][j] = ((-1) ** (i + j)) * sub_matrix.determinant()
         return result.transpose()
+
+    def inverse(self):
+        if self.rows != self.cols:
+            raise ValueError("Inverse is only defined for square matrices.")
+        det = self.determinant()
+        if det == 0:
+            raise ValueError("Matrix is not invertible (determinant is zero).")
+        adj = self.adjoint()
+        result = Matrix(self.rows, self.cols)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result.data[i][j] = adj.data[i][j] / det
+        return result
 
     def __str__(self):
         return '\n'.join([' '.join([str(item) for item in row]) for row in self.data])
